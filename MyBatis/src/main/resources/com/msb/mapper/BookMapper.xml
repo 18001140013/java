@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.msb.mapper.BookMapper">
+    <!--    查询所有book书籍-->
+    <select id="selectAllBooks" resultType="Book">
+        select * from t_book
+    </select>
+    <!--    通过id查询book书籍-->
+    <select id="selectOneBookById" resultType="Book">
+        select * from t_book where id=#{arg0}
+    </select>
+    <!--    通过id+name 查询book书籍,传参为对象-->
+    <select id="selectOneBookByObject" resultType="Book">
+        select * from t_book where id=#{id} and name=#{name}
+    </select>
+    <!--    增加-->
+    <insert id="addOneBook">
+        insert into t_book(id,name,author,price) values (#{id},#{name},#{author},#{price})
+    </insert>
+    <!--    删-->
+    <delete id="deleteAllIdNullBook">
+        delete from t_book where id is NULL
+    </delete>
+    <!--    改-->
+    <update id="updateNameById">
+        update t_book set name=#{arg0} where id=#{arg1}
+    </update>
+</mapper>
