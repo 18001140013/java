@@ -11,6 +11,7 @@
     <modules>
         <module>MyBatis</module>
         <module>TestSpring01</module>
+        <module>TestWeb</module>
     </modules>
 
     <properties>
