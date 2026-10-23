@@ -18,21 +18,21 @@
     </properties>
 
     <dependencies>
-        <!--    依赖库jdbc-->
+        <!--    数据库驱动-jdbc-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.33</version>
             <scope>compile</scope>
         </dependency>
-        <!--    依赖库mybatis-->
+        <!--    数据连接层-mybatis-->
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
             <version>3.5.19</version>
             <scope>compile</scope>
         </dependency>
-        <!--        log4j mybatisSql执行日志打印-->
+        <!--        日志：log4j mybatisSql执行日志打印-->
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 业务services bBook为对象名 后面类路径-->
+    <!--    测试：无参构造函数创建、set-->
+    <bean id="bBook" class="com.msb.pojo.Book">
+        <!--        这里name中名字与setXXX后面名字保持一致-->
+        <property name="id" value="1"></property>
+        <property name="name" value="小明"></property>
+    </bean>
+
+    <!--    测试：有参构造函数创建-->
+    <bean id="bBook2" class="com.msb.pojo.Book">
+        <!--         对应构造函数参数名-->
+        <constructor-arg name="id" value="2"></constructor-arg>
+        <constructor-arg name="name" value="小明2"></constructor-arg>
+    </bean>
+
+    <!--    测试：ref对象注入-->
+    <bean id="boy" class="com.msb.pojo.Boy">
+        <property name="name" value="小华"></property>
+        <property name="age" value="16"></property>
+    </bean>
+    <bean id="girl" class="com.msb.pojo.Girl">
+         <property name="name" value="小丽"></property>
+         <property name="age" value="16"></property>
+         <property name="boyFriend" ref="boy"></property>
+    </bean>
+
+</beans>
