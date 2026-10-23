@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+		https://www.springframework.org/schema/context/spring-context.xsd
+        ">
+
+    <!--    【1】 连接数据库 配置转代码-->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
+        <property name="url"
+                  value="jdbc:mysql://127.0.0.1:3306/demo?sslMode=DISABLED&amp;connectionTimeZone=Asia/Shanghai&amp;characterEncoding=utf-8&amp;connectTimeout=3000&amp;socketTimeout=30000"></property>
+        <property name="username" value="root"></property>
+        <property name="password" value="root"></property>
+    </bean>
+
+    <!--    【2】 获取SqlSessionFactory对象-->
+    <!--    以前sqlSessionFactory都是在测试代码中我们自己创建的，但是现在不用了，整合包中提供的 SqlSessionFactoryBuilder-->
+    <bean id="factory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--        注入数据源-->
+        <property name="dataSource" ref="dataSource"></property>
+        <!--        实体类名注册-包下名字起别名 -->
+        <property name="typeAliasesPackage" value="com.msb.pojo"></property>
+        <!--        解析myBatis.xml文件的 -->
+        <property name="configLocation" value="classpath:mybatis.xml"></property>
+
+    </bean>
+
+    <!--    【3】 扫描mapper文件-->
+    <!--    设置扫描哪个包，进行接口绑定-->
+    <!--    所有的Mapper接口代理对象都能创建出来，可以直接从容器中获取出来了-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--        和SqlSessionFactory产生联系，以前接口绑定方式是：sqlSession.getMapper(BookMapper.class)
+        以前通过sqlSession来调用mapper,所以这里一定要注入工厂类
+        注意：这里sqlSessionFactoryBeanName类型在内部为String,所以value把工厂名字写过来就行
+        -->
+        <property name="sqlSessionFactoryBeanName" value="factory"></property>
+        <!--        扫描包-包下名字起别名 -->
+        <property name="basePackage" value="com.msb.mapper"></property>
+    </bean>
+
+    <!--    【4】 扫描包下的注解-->
+    <!--    使用注解注扫描-服务层-->
+    <context:component-scan base-package="com.msb.service"></context:component-scan>
+    <context:component-scan base-package="com.msb.mapper"></context:component-scan>
+
+</beans>

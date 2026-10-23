@@ -13,6 +13,7 @@
         <module>TestSpring01</module>
         <module>TestWeb</module>
         <module>TestSpringMVC</module>
+        <module>TestSSM</module>
     </modules>
 
     <properties>
