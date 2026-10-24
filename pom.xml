@@ -14,6 +14,7 @@
         <module>TestWeb</module>
         <module>TestSpringMVC</module>
         <module>TestSSM</module>
+        <module>TestSpringBoot</module>
     </modules>
 
     <properties>
